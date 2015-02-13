@@ -71,6 +71,9 @@ version of the library. This was fixed by adding :
 ```
 to the package.json file.
  
+Webpack - This build tool seems really nice (like browserify). Was a bit challenging when it broke on binary files. There
+were also 3rd party React components (React-typeahead, React-autocomplete) that it wasn't building correctly dispite
+indicating that I wanted all '.js' files tobe parsed as JSX.
  
 Fluxible - Was really interesting to see how the isomorphic rendering was occurring. The application flow seemed really
 understandable however the FetchR plugin isn't currently working for me in the browser. I added an [issue](https://github.com/yahoo/fluxible-plugin-fetchr/issues/17)

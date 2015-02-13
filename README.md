@@ -71,7 +71,7 @@ to the package.json file.
  
  
 Fluxible - Was really interesting to see how the isomorphic rendering was occurring. The application flow seemed really
-understandable however the FetchR plugin isn't currently working for me. I added an [issue](https://github.com/yahoo/fluxible-plugin-fetchr/issues/17)
+understandable however the FetchR plugin isn't currently working for me in the browser. I added an [issue](https://github.com/yahoo/fluxible-plugin-fetchr/issues/17)
 on their Github Site so hopefully this can be fixed soon. Otherwise may need to use something like superagent on the frontend
 and regular old express routes on the back end, which is totally doable. 
 

@@ -56,7 +56,8 @@ The choice of databases went through several iterations including:
 a linux environment, I was having difficulty accessing the container running in boot2docker VM on OSX.
 - SQLite3 - this was working well in tests but Webpack was choking on the native binary -- BTW later found out that you
 can excempt packages from Webpack in the package.json or in the Webpack options
-- Firebase - briefly tried but it choked on the web based upload of the JSON file I made from the data
+- Firebase - briefly tried but it choked on the web based upload of the JSON file I made from the data and the poor query
+support also dissuaded me
 - Postgresql - settled on this, although it was not without challenges. When using the "Copy ... From ..." syntax Postgresql
 complained about data past the last column. This happened in the psql CLI and using PGadmin. I tried to convert the data
 to csv without luck and re-exporting the tsv to a text without luck. As a last ditch effort I imported the file into an 

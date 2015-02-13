@@ -1,7 +1,9 @@
 #Fluxible variants
 A isomorphic webapp to search for genetic variants using Yahoo's [Fluxible](http://fluxible.io/) library 
 and [React](http://facebook.github.io/react/) view components. This application is rendered
-on the server and exported to the client as a Single Page App.
+on the server and exported to the client as a Single Page App. 
+
+**Note: this is a _work in progress_**
 
 ###Planned features
 

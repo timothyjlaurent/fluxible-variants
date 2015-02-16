@@ -4,11 +4,14 @@ var React = require('react');
 var ApplicationStore = require('../stores/ApplicationStore');
 var RouterMixin = require('flux-router-component').RouterMixin;
 var FluxibleMixin = require('fluxible').Mixin;
-var VariantStore = require('../stores/VariantStore');
+var VariantStore = require('../stores/VariantStore')
 var requestGeneSuggestions = require('../actions/requestGeneSuggestions');
+//var Typeahead = require('./Typeahead.jsx');
+//var autoComplete = require('kendo-ui-webpack/kendo.ui.AutoComplete.js');
+
 //var Autocomplete = require('react-autocomplete');
-//var Combobox = Autocomplete.Combobox;
-//var Option = Autocomplete.Option;
+////var Combobox = require('./lib/Combobox');
+//var Option = require('./lib/Option');
 
 var Application = React.createClass({
     mixins: [ FluxibleMixin],
@@ -51,7 +54,7 @@ var Application = React.createClass({
                 seed : val
             })
         };
-        this.setState(val);
+        this.setState({geneSearch : val} );
     },
     render: function () {
         var table ;
@@ -66,24 +69,37 @@ var Application = React.createClass({
                 </tr>
             </table>);
         }
-            //    {this.state.variants.map(function(variant){
-            //        return ({this.fields.map(function(field){
-            //            if ( field === 'URL' ) {
-            //                return <td><a href="{variant.URL}">link</a></td>;
-            //            }
-            //            return <td>{variant[field]}</td>;
-            //        })})
-            //    })}
-            //);
+        //    {this.state.variants.map(function(variant){
+        //        return ({this.fields.map(function(field){
+        //            if ( field === 'URL' ) {
+        //                return <td><a href="{variant.URL}">link</a></td>;
+        //            }
+        //            return <td>{variant[field]}</td>;
+        //        })})
+        //    })}
+        //);
         //var menuContent = this.
         return (
             <div>
-            <input value={this.state.geneSearch} onChange={this.handleAutocompleteChange} />
-            {table}
-                hello
+                <div id="gene-input">
+                <input class="typeahead" value={this.state.geneSearch} onChange={this.handleAutocompleteChange} />
+                </div>
+                {table}
+
             </div>
-        );
+        );;
+    },
+    componentDidMount : function() {
+        $('#gene-input .typeahead').typeahead({
+            hint : true,
+            highlight:true,
+            minLength : 2
+        },
+        {
+        })
     }
+
+
 
     //componentDidUpdate: function(prevProps, prevState) {
     //    var newState = this.state;

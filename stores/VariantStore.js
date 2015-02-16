@@ -6,7 +6,7 @@ var ApplicationStore = createStore({
     storeName: 'VariantStore',
     handlers: {
         'AUTOCOMPLETE_SUCCESS': 'newAutocomplete',
-        'AUTOCOMPLETE_FAIL': 'clearAutocomlete'
+        'AUTOCOMPLETE_FAIL': 'clearAutocomplete'
     },
     fields:[
     'Gene',
@@ -36,54 +36,21 @@ var ApplicationStore = createStore({
         this.emitChange();
     },
     newAutocomplete: function newAutocomplete(payload){
-        this.autocomplete = payload;
+        this.autocomplete = payload.rows.map(function(item){
+            return item["Gene"];
+        });
         this.emitChange();
     },
     getAutocomplete : function getAutocomplete(){
         return this.autocomplete;
     },
-    //handleNavigate: function (route) {
-    //    if (this.currentRoute && (this.currentRoute.url === route.url)) {
-    //        return;
-    //    }
-    //
-    //    var pageName = route.config.page;
-    //    var page = this.pages[pageName];
-    //
-    //    this.currentPageName = pageName;
-    //    this.currentPage = page;
-    //    this.currentRoute = route;
-    //    this.emitChange();
-    //},
-    //getCurrentPageName: function () {
-    //    return this.currentPageName;
-    //},
-    //getPageTitle: function () {
-    //    return this.pageTitle;
-    //},
-    //getCurrentRoute: function () {
-    //    return this.currentRoute;
-    //},
-    //getPages: function () {
-    //    return this.pages;
-    //},
     dehydrate: function () {
         return {
-            //currentPageName: this.currentPageName,
-            //currentPage: this.currentPage,
-            //pages: this.pages,
-            //route: this.currentRoute,
-            //pageTitle: this.pageTitle
             variants : this.variants,
             autocomplete : this.autocomplete
         };
     },
     rehydrate: function (state) {
-        //this.currentPageName = state.currentPageName;
-        //this.currentPage = state.currentPage;
-        //this.pages = state.pages;
-        //this.currentRoute = state.route;
-        //this.pageTitle = state.pageTitle;
         this.variants = state.variants,
         this.autocomplete = autocomplete
     }

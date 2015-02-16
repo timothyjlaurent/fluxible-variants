@@ -10,9 +10,19 @@ function getGenes(seed, callback){
         if(err){
             return console.error("error fetching client from pool", err);
         }
-        client.query('select distinct("Gene") from variants v where "Gene" ~* \'^$1\'',
-            [seed.seed],
+
+        // This creates the regex
+        var qry =  '^' + seed ;
+
+        var queryConfig = {
+            text : 'select distinct("Gene") from variants where "Gene" ~* $1 order by "Gene"',
+            name: 'variant gene starts with'
+        }
+
+        client.query(queryConfig,
+            [qry],
             function(err, result){
+                done();
                 if(err){
                     callback(err, null);
                 }

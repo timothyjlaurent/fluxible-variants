@@ -4,7 +4,7 @@ and [React](http://facebook.github.io/react/) view components. This application 
 on the server and exported to the client as a Single Page App. 
 
 ### Screenshots
-
+![Alt text](/screenshots/select_menu.png?raw=true)
 ![Alt text](/screenshots/results.png?raw=true)
 
 

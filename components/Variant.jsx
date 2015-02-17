@@ -55,20 +55,6 @@ var Application = React.createClass({
             table =( <h3>No variants found</h3>);
         } else {
 
-
-            //var rows;
-
-            //for( var variant in variants ){
-            //
-            //
-            //
-            //
-            //    var row = (<tr key={variant.id}>);
-            //
-            //
-            //
-            // }
-
             var rows = [];
 
             for(var i = 0 ; i < this.state.variants.length ; i += 1 ){
@@ -76,7 +62,7 @@ var Application = React.createClass({
                 var fields = this.state.fields.map(function (field) {
                     if (field == 'URL') {
                         return ( <td>
-                            <a href={variant[field]}>link</a>
+                            <a target="_blank" href={variant[field]}>link</a>
                         </td> );
                     }
                     return ( <td>

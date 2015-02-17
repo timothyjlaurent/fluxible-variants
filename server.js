@@ -17,7 +17,7 @@ var React = require('react');
 var app = require('./app');
 var htmlComponent = React.createFactory(require('./components/Html.jsx'));
 var geneService = require('./services/GeneService');
-var annotationService = require('./services/AnnotationService');
+var variantService = require('./services/VariantService');
 
 
 var server = express();
@@ -26,7 +26,7 @@ server.use('/public', express.static(__dirname + '/build'));
 
 var fetchrPlugin = app.getPlugin('FetchrPlugin');
 fetchrPlugin.registerService(geneService);
-fetchrPlugin.registerService(annotationService);
+fetchrPlugin.registerService(variantService);
 server.use(fetchrPlugin.getXhrPath(), fetchrPlugin.getMiddleware());
 
 

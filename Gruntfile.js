@@ -4,10 +4,18 @@ module.exports = function (grunt) {
     grunt.initConfig({
         clean: ['build'],
         concurrent: {
-            dev: ['nodemon:app', 'webpack:dev'],
+            dev: ['nodemon:app', 'webpack:dev', 'node-inspector:dev'],
             //dev: ['node-inspector', 'webpack:dev'],
             options: {
                 logConcurrentOutput: true
+            }
+        },
+
+        'node-inspector': {
+            dev: {
+                options: {
+                    'save-live-edit' : true
+                }
             }
         },
         jshint: {
@@ -47,7 +55,8 @@ module.exports = function (grunt) {
                 module: {
                     loaders: [
                         { test: /\.css$/, loader: 'style!css' },
-                        { test: /\.js.*$/, loader: 'jsx-loader' },
+                        { test: /react\-autocomplete/, loader: 'jsx-loader' },
+                        { test: /\.jsx?/, loader: 'jsx-loader' },
                         { test: /\.json$/, loader: 'json-loader'},
                         { test: /kendo\-ui\-core[\///].*\.js$/, loader: "imports?jQuery=jquery" }
                     ]
@@ -68,6 +77,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-webpack');
+    grunt.loadNpmTasks('grunt-node-inspector');
 
     // tasks
     //grunt.registerTask('default', ['clean', 'jshint', 'concurrent:dev']);

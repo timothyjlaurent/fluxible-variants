@@ -2,16 +2,15 @@
 'use strict';
 var React = require('react');
 var ApplicationStore = require('../stores/ApplicationStore');
-var RouterMixin = require('flux-router-component').RouterMixin;
+//var RouterMixin = require('flux-router-component').RouterMixin;
 var FluxibleMixin = require('fluxible').Mixin;
 var VariantStore = require('../stores/VariantStore')
-var requestGeneSuggestions = require('../actions/requestGeneSuggestions');
-//var Typeahead = require('./Typeahead.jsx');
-//var autoComplete = require('kendo-ui-webpack/kendo.ui.AutoComplete.js');
 
-//var Autocomplete = require('react-autocomplete');
-////var Combobox = require('./lib/Combobox');
-//var Option = require('./lib/Option');
+//Actions
+var requestGeneSuggestions = require('../actions/requestGeneSuggestions');
+var requestVariants = require('../actions/requestVariants');
+
+
 
 var Application = React.createClass({
     mixins: [ FluxibleMixin],
@@ -30,84 +29,99 @@ var Application = React.createClass({
         };
     },
 
-
-    //renderComboboxOptions : function(){
-    //  return this.genes.map(function(gene){
-    //      return(
-    //          <ComboboxOption
-    //              key={gene.gene}
-    //              value={gene.gene}
-    //          >{gene.gene}</ComboboxOption>
-    //      );
-    //
-    //  });
-    //},
-
     onChange: function () {
         this.setState(this.getState());
     },
     handleAutocompleteChange: function(e){
         var val = e.target.value;
         if( val.length>1 ){
-            //todo invoke gene search action
-            this.executeAction(requestGeneSuggestions,{
+            // invoke gene search action
+            this.executeAction( requestGeneSuggestions,{
                 seed : val
             })
         };
         this.setState({geneSearch : val} );
     },
+
+    searchVariants : function(){
+        this.executeAction( requestVariants,{
+            gene : this.state.geneSearch
+        } )
+    },
+
     render: function () {
         var table ;
         if(this.state.variants.length < 1){
-            table = <h3>No variants found</h3>;
+            table =( <h3>No variants found</h3>);
         } else {
+
+
+            //var rows;
+
+            //for( var variant in variants ){
+            //
+            //
+            //
+            //
+            //    var row = (<tr key={variant.id}>);
+            //
+            //
+            //
+            // }
+
+            var rows = [];
+
+            for(var i = 0 ; i < this.state.variants.length ; i += 1 ){
+                var variant = this.state.variants[i];
+                var fields = this.state.fields.map(function (field) {
+                    if (field == 'URL') {
+                        return ( <td>
+                            <a href={variant[field]}>link</a>
+                        </td> );
+                    }
+                    return ( <td>
+                        <p>{variant[field]}</p>
+                    </td> );
+                });
+
+                var row = (<tr key={variant['id']}> {fields} </tr> );
+
+                rows.push(row);
+            }
             table = (<table className="table table-hover">
                 <tr>
-                {this.fields.map(function (field) {
+                {this.state.fields.map(function (field) {
                     return <th>{field}</th>;
                 })}
                 </tr>
+                {rows}
             </table>);
         }
-        //    {this.state.variants.map(function(variant){
-        //        return ({this.fields.map(function(field){
-        //            if ( field === 'URL' ) {
-        //                return <td><a href="{variant.URL}">link</a></td>;
-        //            }
-        //            return <td>{variant[field]}</td>;
-        //        })})
-        //    })}
-        //);
-        //var menuContent = this.
+
+
+        var autoCompleteOptions = this.state.autocomplete.map(function(gene){
+            return ( <option key={gene['Gene']} value={gene['Gene']}> { gene['Gene'] }  </option> );
+        })
+
+
         return (
             <div>
                 <div id="gene-input">
-                <input class="typeahead" value={this.state.geneSearch} onChange={this.handleAutocompleteChange} />
+                <input className="col-sm-2" value={this.state.geneSearch} onChange={this.handleAutocompleteChange} />
+                   <div class="row">
+                    <select className="col-sm-2"  onInput={this.handleAutocompleteChange} >
+                    {autoCompleteOptions}
+                </select>
+                      </div>
+                    <button onClick={this.searchVariants} className="btn btn-success">Get Variants</button>
+
                 </div>
                 {table}
 
             </div>
         );;
-    },
-    componentDidMount : function() {
-        $('#gene-input .typeahead').typeahead({
-            hint : true,
-            highlight:true,
-            minLength : 2
-        },
-        {
-        })
     }
 
-
-
-    //componentDidUpdate: function(prevProps, prevState) {
-    //    var newState = this.state;
-    //    if (newState.pageTitle === prevState.pageTitle) {
-    //        return;
-    //    }
-    //    document.title = newState.pageTitle;
-    //}
 });
 
 module.exports = Application;

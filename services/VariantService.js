@@ -8,15 +8,23 @@ var pg = require('pg');
 var conString = "postgres://MyMBP@localhost/informatics";
 
 
-function getGenes(gene, callback){
+function getVariants(gene, callback){
 
     pg.connect(conString, function(err, client, done){
         if(err){
             return console.error("error fetching client from pool", err);
         }
-        client.query('select * from variants v where "Gene" = $1',
+        // This creates the regex
+//         var qry =  '^' + gene ;
+        var queryConfig = {
+            text : 'select * from variants where "Gene" = $1 order by "Gene"',
+            name: 'variant by gene'
+        }
+
+        client.query(queryConfig,
             [gene],
             function(err, result){
+                done();
                 if(err){
                     callback(err, null);
                 }
@@ -29,8 +37,8 @@ function getGenes(gene, callback){
 //console.log(getGenes("A"));
 
 module.exports = {
-    name : 'annotation',
+    name : 'variant',
     read : function(req, resource, params, config, callback){
-        getGenes(params.seed, callback);
+        getVariants(params.gene, callback);
     }
 }

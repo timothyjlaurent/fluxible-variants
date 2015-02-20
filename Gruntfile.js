@@ -56,7 +56,7 @@ module.exports = function (grunt) {
                     loaders: [
                         { test: /\.css$/, loader: 'style!css' },
                         { test: /react\-autocomplete/, loader: 'jsx-loader' },
-                        { test: /\.jsx?/, loader: 'jsx-loader' },
+                        { test: /\.jsx?$/, loader: 'jsx-loader' },
                         { test: /\.json$/, loader: 'json-loader'},
                         { test: /kendo\-ui\-core[\///].*\.js$/, loader: "imports?jQuery=jquery" }
                     ]
@@ -66,7 +66,8 @@ module.exports = function (grunt) {
                 },
                 devtool: 'source-map',
                 watch: true,
-                keepalive: true
+                keepalive: true,
+                debug: true
             }
         }
     });

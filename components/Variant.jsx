@@ -10,7 +10,7 @@ var VariantStore = require('../stores/VariantStore')
 var requestGeneSuggestions = require('../actions/requestGeneSuggestions');
 var requestVariants = require('../actions/requestVariants');
 
-
+var Autocomplete = require('jsx!react-autocomplete/lib/main.js');
 
 var Application = React.createClass({
     mixins: [ FluxibleMixin],

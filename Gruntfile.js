@@ -41,10 +41,7 @@ module.exports = function (grunt) {
         webpack: {
             dev: {
                 resolve: {
-                    extensions: ['', '.js', '.jsx'],
-                    alias : {
-                        "kendo": "kendo-ui-webpack"
-                    }
+                    extensions: ['', '.js', '.jsx']
                 },
                 entry: './client.js',
                 output: {
@@ -55,10 +52,8 @@ module.exports = function (grunt) {
                 module: {
                     loaders: [
                         { test: /\.css$/, loader: 'style!css' },
-                        { test: /react\-autocomplete/, loader: 'jsx-loader' },
                         { test: /\.jsx?$/, loader: 'jsx-loader' },
-                        { test: /\.json$/, loader: 'json-loader'},
-                        { test: /kendo\-ui\-core[\///].*\.js$/, loader: "imports?jQuery=jquery" }
+                        { test: /\.json$/, loader: 'json-loader'}
                     ]
                 },
                 stats: {

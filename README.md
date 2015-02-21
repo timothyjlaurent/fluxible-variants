@@ -3,13 +3,22 @@ A isomorphic webapp to search for genetic variants using Yahoo's [Fluxible](http
 and [React](http://facebook.github.io/react/) view components. This application is rendered
 on the server and exported to the client as a Single Page App. 
 
+### Screenshots
+![Alt text](/screenshots/select_menu.png?raw=true)
+![Alt text](/screenshots/results.png?raw=true)
+
+
 **Note: this is a _work in progress_**
+### Features
+- has basic typeahead functionality where a select field is populated with gene names after 2 key strokes
+- fetches variant data from the database and displays to the user
+- has links to pubmed resources
+
 
 ###Planned features
 
-- typeahead for selection gene names
+- true typeahead (once I fix the jsx webpack build issues)
 - database security
-- fetching of variants when gene selected
 
 ## Build database
 

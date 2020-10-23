@@ -64,7 +64,7 @@
     "json-loader": "~0.5.1",
     "jsx-loader": "^0.12.2",
     "nodemon": "^1.2.1",
-    "npm": "^2.5.1",
+    "npm": "^6.14.8",
     "precommit-hook": "^1.0.7",
     "webpack": "^1.4.12",
     "webpack-dev-server": "^1.6.5"

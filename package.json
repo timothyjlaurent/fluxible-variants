@@ -37,7 +37,7 @@
     "react": "^0.12.0",
     "react-autocomplete": "0.0.2",
     "react-typeahead": "^1.0.1",
-    "serialize-javascript": "^1.0.0",
+    "serialize-javascript": "^5.0.1",
     "serve-favicon": "^2.1.6",
     "sqlite3": "^3.0.5",
     "stream-transform": "0.0.6"
